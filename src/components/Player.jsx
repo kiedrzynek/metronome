@@ -4,16 +4,14 @@ import sound from '../sounds/metronome-klack.wav';
 
 const Player = (props) => {
 
-    const handlePlay = () => props.onClick('playing');
-    // const handlePause = () => props.onClick('paused');
+    const handlePlay = () => props.onClick();
 
     return (
         <div>
             <audio id="audio">
                 <source src={sound} type="audio/wav" />
             </audio>
-            <button onClick={handlePlay}>Play</button>
-            {/* <button onClick={handlePause}>Pause</button> */}
+            <button onClick={handlePlay}>{props.text}</button>
         </div>
     )
 }

@@ -9,19 +9,26 @@ const App = () => {
     setInputVal(data);
   }
 
-  const [play, setPlay] = useState();
-  const handlePlay = (data) => {
-    let audio = document.getElementById('audio');
-    console.log('click play');
-    setPlay(data);
-    audio.play();
+  let tempo =  1000 * 60 / inputVal;
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  let audio = document.getElementById('audio');
+
+  let playing = () => {
+    setInterval(function() {
+      audio.play();
+    }, tempo);
   }
 
-  // const [pause, setPause] = useState();
-  // const handlePause = (data) => {
-  //   setPause(data);
-  //   audio.pause();
-  // }
+  const handlePlay = () => {
+    playing();
+    setIsPlaying(true);
+  }
+
+  const stopPlaying = () => {
+    clearInterval(playing);
+  }
 
   return (
     <div className="App">
@@ -30,7 +37,7 @@ const App = () => {
         onChange={e => inputChange(e)} 
         placeholder="Type here the tempo">
       </Input>
-      <Player data={play} onClick={handlePlay} />
+      <Player onClick={handlePlay} text={isPlaying ? 'Pause' : 'Play'} />
     </div>
   );
 }
