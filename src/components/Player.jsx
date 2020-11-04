@@ -7,11 +7,11 @@ const Player = (props) => {
     const handlePlay = () => props.onClick();
 
     return (
-        <div>
+        <div className="player">
             <audio id="audio">
                 <source src={sound} type="audio/wav" />
             </audio>
-            <button onClick={handlePlay}>{props.text}</button>
+            <button className="playBtn" onClick={handlePlay}>{props.text}</button>
         </div>
     )
 }
