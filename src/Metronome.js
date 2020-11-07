@@ -2,6 +2,7 @@ import React, {useState, useRef} from 'react';
 import './App.scss';
 import Input from './components/Input';
 import Player from './components/Player';
+import img from './img/metronome.png';
 
 const Metronome = () => {
   const [inputVal, setInputVal] = useState('');
@@ -39,6 +40,10 @@ const Metronome = () => {
 
   return (
     <div className="Metronome">
+      <div className="header">
+        <img className="metronome-img" src={img} alt=""></img>
+        <span className="text-a">Your</span><span className="text-b">&nbsp;metronome</span>
+      </div>
       <Input 
         data={inputVal} 
         onChange={e => inputChange(e)} 
