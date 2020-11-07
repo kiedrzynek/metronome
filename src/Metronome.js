@@ -3,7 +3,7 @@ import './App.scss';
 import Input from './components/Input';
 import Player from './components/Player';
 
-const App = () => {
+const Metronome = () => {
   const [inputVal, setInputVal] = useState('');
   const inputChange = (data) => {
     setInputVal(data);
@@ -42,4 +42,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default Metronome;
