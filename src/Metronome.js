@@ -9,21 +9,31 @@ const Metronome = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  let intervalID = useRef(null);
+  const intervalID = useRef(null);
 
-  let tempo =  1000 * (60 / inputVal);
+  const tempo =  1000 * (60 / inputVal);
 
-  let sound = document.getElementById('audio');
+  const sound = document.getElementById('audio');
+
+  const play = () => sound.play();
+
+  const startPlaying = () => {
+    intervalID.current = setInterval(play, tempo);
+    setIsPlaying(true);
+    sound.play();
+  }
+
+  const stopPlaying = () => {
+    clearInterval(intervalID.current);
+    setIsPlaying(false);
+  };
 
 
   const handlePlay = () => {
     if (!isPlaying) {
-      intervalID.current = setInterval(function(){sound.play()}, tempo); //play sound
-      setIsPlaying(true);
-      sound.play();
+      startPlaying();
     } else {
-      clearInterval(intervalID.current); //stop playing
-      setIsPlaying(false);
+      stopPlaying();
     }
   }
 
