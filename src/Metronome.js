@@ -1,37 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import './App.scss';
 import Input from './components/Input';
 import Player from './components/Player';
 
 const Metronome = () => {
   const [inputVal, setInputVal] = useState('');
-  const inputChange = (data) => {
-    setInputVal(data);
-  }
-
-  let tempo =  1000 * 60 / inputVal;
+  const inputChange = data => setInputVal(data);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  let audio = document.getElementById('audio');
+  let intervalID = useRef(null);
 
-  let playing = () => {
-    setInterval(function() {
-      audio.play();
-    }, tempo);
-  }
+  let tempo =  1000 * (60 / inputVal);
+
+  let sound = document.getElementById('audio');
+
 
   const handlePlay = () => {
-    playing();
-    setIsPlaying(true);
-  }
-
-  const stopPlaying = () => {
-    clearInterval(playing);
+    if (!isPlaying) {
+      intervalID.current = setInterval(function(){sound.play()}, tempo); //play sound
+      setIsPlaying(true);
+      sound.play();
+    } else {
+      clearInterval(intervalID.current); //stop playing
+      setIsPlaying(false);
+    }
   }
 
   return (
-    <div className="App">
+    <div className="Metronome">
       <Input 
         data={inputVal} 
         onChange={e => inputChange(e)} 
